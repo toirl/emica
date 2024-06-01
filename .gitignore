@@ -1,0 +1,24 @@
+# Mac specific
+.DS_store
+*.nosync
+
+# Virtual envs
+venv
+
+# Python
+emica.egg-info
+*.pyc
+
+# Testing
+.coverage
+coverage.xml
+
+# Docs
+site
+
+# Build
+dist
+build
+
+# Operation
+.env

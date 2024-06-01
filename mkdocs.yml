@@ -1,0 +1,7 @@
+theme:
+    name: material
+site_name: EmiCa
+plugins:
+  - search
+  - mermaid2
+  - mkdocstrings
