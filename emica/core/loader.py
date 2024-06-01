@@ -1,5 +1,7 @@
-from typing import Dict, Protocol
+from typing import Protocol
+
+from emica.core.metrics import Metrics
 
 
 class Loader(Protocol):
-    def fetch_data(self) -> Dict: ...
+    def fetch_data(self) -> Metrics: ...
