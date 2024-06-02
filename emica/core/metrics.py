@@ -11,6 +11,8 @@ class Metric:
     """Duration of observation in seconds"""
     energy: Optional[float] = None
     """Total energy in kWh"""
+    carbon_embodied: Optional[float] = None
+    """Proportionate embodied carbon gCO2eg"""
     cpu_utilization: Optional[float] = None
     """Utilisation of CPU in percent"""
     cpu_energy: Optional[float] = None
@@ -29,9 +31,9 @@ class Metric:
     """The total Life Cycle Assessment (LCA) emissions of the device in gCO2eg"""
     device_expected_lifespan: Optional[int] = None
     """The excepted lifespan from manufaturing to disposal in seconds"""
-    ressources_total: Optional[int] = None
+    ressources_total: int = 1
+    ressources_used: int = 1
     """Number of total ressources (cpu) which can be used for operation"""
-    ressources_used: Optional[int] = None
     """Number of actually rsed ressources (cpu) for operation"""
     grid_carbon_intesity: Optional[int] = None
     """The emitted carbon during operation in gCO2eg"""
