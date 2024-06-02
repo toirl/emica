@@ -28,11 +28,11 @@ def test_process():
     m = Metric(
         timestamp=datetime.now(tz=UTC),
         duration=60,
-        device_emission_embodied=1234,
+        device_emission_embodied=147000,
         device_expected_lifespan=94608000,  # three years
     )
     # Act
     f = SCIMaterial()
     r = f.process(m)
     # Assert
-    assert r.carbon_embodied == 0.00078259766615931
+    assert r.carbon_embodied == 0.09322678843226789
