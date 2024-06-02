@@ -11,6 +11,8 @@ class Metric:
     """Duration of observation in seconds"""
     energy: Optional[float] = None
     """Total energy in kWh"""
+    carbon: Optional[float] = None
+    """Total carbon in gCO2eq"""
     carbon_embodied: Optional[float] = None
     """Embodied carbon in gCO2eg"""
     carbon_operational: Optional[float] = None
@@ -43,6 +45,8 @@ class Metric:
     """The functional unit in which to express the carbon impact. Must a name of a attribute present in the metrics dataset"""
     funtional_unit_time: Optional[timedelta] = None
     """The time to be used for functional unit conversions"""
+    sci: Optional[float] = None
+    """SCI in gCO2eg per functional unit"""
 
 
 @dataclass
