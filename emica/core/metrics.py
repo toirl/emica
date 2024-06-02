@@ -9,6 +9,8 @@ class Metric:
     """Start date of observation as UTC datetime"""
     duration: int
     """Duration of observation in seconds"""
+    energy: Optional[float] = None
+    """Total energy in kWh"""
     cpu_utilization: Optional[float] = None
     """Utilisation of CPU in percent"""
     cpu_energy: Optional[float] = None
