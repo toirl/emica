@@ -1,7 +1,7 @@
 argcomplete==3.3.0
 Babel==2.15.0
 beautifulsoup4==4.12.3
-certifi==2024.2.2
+certifi==2024.6.2
 cfgv==3.4.0
 charset-normalizer==3.3.2
 click==8.1.7
@@ -13,8 +13,6 @@ decli==0.6.2
 distlib==0.3.8
 docutils==0.21.2
 EditorConfig==0.12.4
-# Editable Git install with no remote (emica==0.1.0)
--e /Users/torsten/Werkbank/emica
 filelock==3.14.0
 ghp-import==2.1.0
 griffe==0.45.2
