@@ -2,13 +2,21 @@ from datetime import UTC, datetime
 
 import pytest
 
-from emica.core.metrics import Metric, Metrics
+from emica.core.metrics import Metric
 from emica.filters.sci_energy import SCIEnergy
 
 
-def test_fail_on_missing_energy_attr():
+@pytest.mark.parametrize("attr", ["memory_energy,cpu_energy"])
+def test_fail_on_missing_attr(attr: str):
     # Arrange
-    m = Metrics(data=[Metric(timestamp=datetime.now(tz=UTC), duration=60, memory_utilization=30)])
+    m = Metric(
+        timestamp=datetime.now(tz=UTC),
+        duration=60,
+        memory_energy=0.001872,
+        cpu_energy=0.00231,
+    )
+    for a in attr.split(","):
+        setattr(m, a, None)
     f = SCIEnergy()
     # Act
     # Assert
@@ -16,21 +24,16 @@ def test_fail_on_missing_energy_attr():
         f.process(m)
 
 
-def test_calculation():
+def test_process():
     # Arrange
-    m = Metrics(
-        data=[
-            Metric(
-                timestamp=datetime.now(tz=UTC),
-                duration=60,
-                memory_capacity=16,
-                memory_energy=0.001872,
-                cpu_energy=0.00231,
-            )
-        ]
+    m = Metric(
+        timestamp=datetime.now(tz=UTC),
+        duration=60,
+        memory_energy=0.001872,
+        cpu_energy=0.00231,
     )
     f = SCIEnergy()
     # Act
     r = f.process(m)
     # Assert
-    assert r.data[0].energy == 0.004182
+    assert r.energy == 0.004182

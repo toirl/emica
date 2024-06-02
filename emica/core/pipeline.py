@@ -1,5 +1,6 @@
 from typing import List
 
+from emica.core.metrics import Metrics
 from emica.logger import get_logger
 
 from .filter import Filter
@@ -14,8 +15,9 @@ class Pipeline:
     def add_filter(self, filter: Filter):
         self.filters.append(filter)
 
-    def process(self, data: dict) -> dict:
+    def process(self, metrics: Metrics) -> Metrics:
         for filter in self.filters:
             log.info("Apply filter", filter=filter.__class__.__name__)
-            data = filter.process(data)
-        return data
+            for metric in metrics:
+                metric = filter.process(metric)
+        return metrics

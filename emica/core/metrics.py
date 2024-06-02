@@ -52,3 +52,6 @@ class Metric:
 @dataclass
 class Metrics:
     data: List[Metric]
+
+    def __getitem__(self, item):
+        return self.data[item]
