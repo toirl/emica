@@ -15,7 +15,6 @@ class SCI:
         if metric.funtional_unit_time is None:
             raise ValueError("functional_unit_time must be set")
 
-        carbon = carbon * metric.funtional_unit_time.total_seconds()
-        metric.carbon = carbon
-        metric.sci = metric.carbon / getattr(metric, metric.funtional_unit)
+        metric.carbon = carbon / getattr(metric, metric.funtional_unit)
+        metric.sci = metric.carbon / getattr(metric, metric.funtional_unit) * metric.funtional_unit_time.total_seconds()
         return metric
