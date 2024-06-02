@@ -12,7 +12,7 @@ def test_fail_on_missing_attr(attr: str):
     m = Metric(
         timestamp=datetime.now(tz=UTC),
         duration=60,
-        device_emission_embodied=1234,
+        device_emission_embodied=147000,
         device_expected_lifespan=94608000,  # three years
     )
     setattr(m, attr, None)
