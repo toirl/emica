@@ -12,8 +12,8 @@ def test_fail_on_missing_energy_attr(attr: str):
     m = Metric(
         timestamp=datetime.now(tz=UTC),
         duration=60,
-        energy=0.00023,
-        grid_carbon_intesity=500,
+        energy=0.001845869190164428,
+        grid_carbon_intesity=423,
     )
     setattr(m, attr, None)
     f = SCIOperation()
@@ -28,11 +28,11 @@ def test_calculation():
     m = Metric(
         timestamp=datetime.now(tz=UTC),
         duration=60,
-        energy=0.00023,
+        energy=0.001845869190164428,
         grid_carbon_intesity=500,
     )
     # Act
     f = SCIOperation()
     r = f.process(m)
     # Assert
-    assert r.carbon_operational == 0.115
+    assert r.carbon_operational == 0.922934595082214
