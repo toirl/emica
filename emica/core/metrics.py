@@ -23,7 +23,7 @@ class Metric:
     """Energy used by the CPU in kWh"""
     cpu_thermal_design_power: Optional[int] = None
     """Thermal design power in Watt"""
-    memory_energy_per_gb: float = 0.00039
+    memory_energy_per_gb: float = 0.000392
     """Energy used to for every used GB of memory in kWh"""
     memory_utilization: Optional[float] = None
     """Utilisation of memory in percent"""
