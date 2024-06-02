@@ -12,7 +12,9 @@ class Metric:
     energy: Optional[float] = None
     """Total energy in kWh"""
     carbon_embodied: Optional[float] = None
-    """Proportionate embodied carbon gCO2eg"""
+    """Embodied carbon in gCO2eg"""
+    carbon_operational: Optional[float] = None
+    """Operational carbon in gCO2eg"""
     cpu_utilization: Optional[float] = None
     """Utilisation of CPU in percent"""
     cpu_energy: Optional[float] = None
