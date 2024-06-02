@@ -61,7 +61,8 @@ omit = [
     # omit anything in a werkbank directory anywhere
     "*/werkbank/*",
     # omit this single file
-    "emica/cli.py"
+    "emica/cli.py",
+    "emica/main.py"
 ]
 
 [tool.coverage.report]
