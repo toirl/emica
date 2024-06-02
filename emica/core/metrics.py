@@ -15,7 +15,7 @@ class Metric:
     """Energy used by the CPU in kWh"""
     cpu_thermal_design_power: Optional[int] = None
     """Thermal design power in Watt"""
-    memory_energy_per_gb: Optional[float] = None
+    memory_energy_per_gb: float = 0.00039
     """Energy used to for every used GB of memory in kWh"""
     memory_utilization: Optional[float] = None
     """Utilisation of memory in percent"""
@@ -37,10 +37,6 @@ class Metric:
     """The functional unit in which to express the carbon impact. Must a name of a attribute present in the metrics dataset"""
     funtional_unit_time: Optional[timedelta] = None
     """The time to be used for functional unit conversions"""
-
-    def __post_init__(self):
-        if self.memory_energy_per_gb is None:
-            self.memory_energy_per_gb = 0.00039
 
 
 @dataclass
