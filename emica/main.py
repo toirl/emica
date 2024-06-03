@@ -15,9 +15,9 @@ from emica.writers.demo import DemoWriter
 log = get_logger()
 
 
-def main():
-    setup_logging(verbosity=5)
-    config = InstanceConfig("./instances.yaml")
+def main(verbosity: int, config_path: str):
+    setup_logging(verbosity=verbosity)
+    config = InstanceConfig(config_path)
     loader = DemoLoader()
     #    loader = PrometheusLoader(host="http://localhost:9090")
     input_data = loader.load()
@@ -46,7 +46,8 @@ def main():
 
     writer = DemoWriter()
     writer.write(input_data)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    main(verbosity=5, config_path="./instances.yaml")

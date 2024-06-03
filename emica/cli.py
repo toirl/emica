@@ -5,23 +5,19 @@ import sys
 import click
 
 from emica.logger import get_logger, setup_logging
+from emica.main import main
 
 logger = get_logger()
 
 
 @click.command()
+@click.option("-c", "--config", help="Path to config file", required=True)
 @click.option("-v", "--verbosity", default=0, count=True, help="Verbosity of logging")
-def main(verbosity: int, args=None):
+def cli_main(verbosity: int, config: str, args=None):
     """Console script for emica"""
     setup_logging(verbosity=verbosity)
-    click.echo("Replace this message by putting your code into emica.cli.main")
-    click.echo("See click documentation at https://click.palletsprojects.com/")
-    logger.info("This is a test INFO log message")
-    logger.debug("This is a test DEBUG log message")
-    logger.warning("This is a test WARNING log message")
-    logger.error("This is a test ERROR log message")
-    return 0
+    return main(verbosity, config)
 
 
 if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+    sys.exit(cli_main())  # pragma: no cover
