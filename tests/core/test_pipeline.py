@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from emica.core.config import InstanceConfig
 from emica.core.metrics import Metric
 from emica.core.pipeline import Pipeline
 from emica.filters.cpu_energy import CPU2Energy
@@ -12,7 +13,7 @@ from emica.loaders.demo import DemoLoader
 from emica.writers.demo import DemoWriter
 
 
-def test_full_sci_pipeline(metric: Metric):
+def test_full_sci_pipeline(metric: Metric, config: InstanceConfig):
     # Arrange
     loader = DemoLoader()
     cpu_energy = CPU2Energy()
@@ -34,7 +35,7 @@ def test_full_sci_pipeline(metric: Metric):
     # Act
     input_data = loader.load()
     for instance in input_data:
-        pipeline.set_defaults({})
+        pipeline.set_defaults(config.get_defaults(instance))
         metrics = input_data[instance]
         metrics = pipeline.process(metrics)
         input_data[instance] = metrics

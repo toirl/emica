@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 
 import pytest
 
+from emica.core.config import InstanceConfig
 from emica.core.metrics import Metric
 
 
@@ -26,3 +27,8 @@ def metric() -> Metric:
         sci=0.016111437377222617,
     )
     return m
+
+
+@pytest.fixture
+def config() -> InstanceConfig:
+    return InstanceConfig("instances.yaml")
