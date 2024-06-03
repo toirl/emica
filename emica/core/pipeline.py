@@ -1,7 +1,6 @@
-from datetime import timedelta
-from typing import List
+from typing import List, Optional
 
-from emica.core.metrics import Instances, Metrics
+from emica.core.metrics import Metrics
 from emica.logger import get_logger
 
 from .filter import Filter
@@ -18,31 +17,27 @@ def apply_defaults(metrics: Metrics, defaults: dict) -> Metrics:  # pragma: no c
 
 
 class Pipeline:
-    def __init__(self):
+    def __init__(self, defaults: Optional[dict] = None):
         self.filters: List[Filter] = []
+        if defaults is None:
+            self.defaults = {}
+        else:  # pragma: no cover
+            self.defaults = defaults
+
+    def set_defaults(self, defaults: dict):
+        self.defaults = defaults
 
     def add_filter(self, filter: Filter):
         self.filters.append(filter)
 
-    def process(self, instances: Instances) -> Instances:
-        for instance in instances:
-            log.info("Processing Instance", instance=instance)
-            metrics = instances[instance]
-            defaults = {
-                "cpu_thermal_design_power": 20,
-                "device_expected_lifespan": 94608000,
-                "device_emission_embodied": 147000,
-                "grid_carbon_intensity": 500,
-                "functional_unit": "duration",
-                "functional_unit_time": timedelta(minutes=1),
-            }
-            metrics = apply_defaults(metrics, defaults)
-            for filter in self.filters:
-                log.info("Apply filter", filter=filter.__class__.__name__)
-                for metric in metrics:
-                    try:
-                        metric = filter.process(metric)
-                    except ValueError as e:  # pragma: no cover
-                        log.warning("Ignoring metric", date=metric.timestamp.isoformat(), error=str(e))
-                        continue
-        return instances
+    def process(self, metrics: Metrics) -> Metrics:
+        metrics = apply_defaults(metrics, self.defaults)
+        for filter in self.filters:
+            log.info("Apply filter", filter=filter.__class__.__name__)
+            for metric in metrics:
+                try:
+                    metric = filter.process(metric)
+                except ValueError as e:  # pragma: no cover
+                    log.warning("Ignoring metric", date=metric.timestamp.isoformat(), error=str(e))
+                    continue
+        return metrics

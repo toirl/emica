@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 
 import pytest
 
@@ -16,8 +16,6 @@ def metric() -> Metric:
         memory_utilization=26.267051696777344,
         device_emission_embodied=147000,
         device_expected_lifespan=94608000,  # three years
-        functional_unit="duration",
-        functional_unit_time=timedelta(minutes=1),
         grid_carbon_intensity=500,
         # Calculated
         memory_energy=0.001647469482421875,

@@ -23,7 +23,9 @@ dependencies = [
     "click",
     "python_dotenv",
     "structlog",
-    "scipy"
+    "scipy",
+    "requests",
+    "pyaml"
 ]
 
 [project.optional-dependencies]
@@ -75,7 +77,8 @@ exclude_lines = [
     "@abstractmethod",
     '^if __name__ == "__main__"',
     "^from.*import",
-    "^import"
+    "^import",
+    "log = get_logger()",
 ]
 
 [tool.commitizen]

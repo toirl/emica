@@ -1,7 +1,13 @@
+from datetime import timedelta
+
 from emica.core.metrics import Metric
 
 
 class SCI:
+    def __init__(self, functional_unit: str, functional_unit_time: timedelta):
+        self._functional_unit = functional_unit
+        self._functional_unit_time = functional_unit_time
+
     def process(self, metric: Metric) -> Metric:
         carbon = 0
         if metric.carbon_operational is not None:
@@ -11,9 +17,9 @@ class SCI:
         if carbon == 0:
             raise ValueError("Either carbon_embodied or carbon_operational must be set")
         if metric.functional_unit is None:
-            raise ValueError("functional_unit must be set")
+            metric.functional_unit = self._functional_unit
         if metric.functional_unit_time is None:
-            raise ValueError("functional_unit_time must be set")
+            metric.functional_unit_time = self._functional_unit_time
 
         metric.carbon = carbon / getattr(metric, metric.functional_unit)
         metric.sci = (

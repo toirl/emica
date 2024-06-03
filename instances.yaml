@@ -1,0 +1,11 @@
+global:
+  cpu_thermal_design_power: 20
+  device_expected_lifespan: 94608000 # 3 years in seconds
+  device_emission_embodied: 147000
+  grid_carbon_intensity: 500
+instances:
+  demo:
+    cpu_thermal_design_power: 20
+    device_expected_lifespan: 94608000 # 3 years in seconds
+    device_emission_embodied: 147000
+    grid_carbon_intensity: 500

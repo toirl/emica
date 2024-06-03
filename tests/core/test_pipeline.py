@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from emica.core.metrics import Metric
 from emica.core.pipeline import Pipeline
 from emica.filters.cpu_energy import CPU2Energy
@@ -18,7 +20,7 @@ def test_full_sci_pipeline(metric: Metric):
     sci_e = SCIEnergy()
     sci_o = SCIOperation()
     sci_m = SCIMaterial()
-    sci = SCI()
+    sci = SCI("duration", timedelta(minutes=1))
     writer = DemoWriter()
 
     pipeline = Pipeline()
@@ -27,15 +29,19 @@ def test_full_sci_pipeline(metric: Metric):
     pipeline.add_filter(sci_e)
     pipeline.add_filter(sci_m)
     pipeline.add_filter(sci_o)
-
     pipeline.add_filter(sci)
+
     # Act
     input_data = loader.load()
-    output_data = pipeline.process(input_data)
-    writer.write(output_data)
+    for instance in input_data:
+        pipeline.set_defaults({})
+        metrics = input_data[instance]
+        metrics = pipeline.process(metrics)
+        input_data[instance] = metrics
+    writer.write(input_data)
 
     # Assert
-    expected = output_data["test"].data[0]
+    expected = input_data["demo"].data[0]
     # assert expected.sci == 0.0169360230585747
     # # That was the origin value from the IF using the teads curve plugin. I
     # guess that the implementation of the algorithem differs a bit.
