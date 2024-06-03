@@ -5,14 +5,15 @@ from emica.filters.sci import SCI
 from emica.filters.sci_energy import SCIEnergy
 from emica.filters.sci_material import SCIMaterial
 from emica.filters.sci_operation import SCIOperation
-from emica.loaders.demo import DemoLoader
+from emica.loaders.prometheus import PrometheusLoader
 from emica.logger import setup_logging
 from emica.writers.demo import DemoWriter
 
 
 def main():
     setup_logging(verbosity=5)
-    loader = DemoLoader()
+    # loader = DemoLoader()
+    loader = PrometheusLoader(host="http://localhost:9090")
     input_data = loader.load()
 
     pipeline = Pipeline()

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 
 @dataclass
@@ -39,11 +39,11 @@ class Metric:
     ressources_used: int = 1
     """Number of total ressources (cpu) which can be used for operation"""
     """Number of actually rsed ressources (cpu) for operation"""
-    grid_carbon_intesity: Optional[int] = None
+    grid_carbon_intensity: Optional[int] = None
     """The emitted carbon during operation in gCO2eg"""
-    funtional_unit: Optional[str] = None
+    functional_unit: Optional[str] = None
     """The functional unit in which to express the carbon impact. Must a name of a attribute present in the metrics dataset"""
-    funtional_unit_time: Optional[timedelta] = None
+    functional_unit_time: Optional[timedelta] = None
     """The time to be used for functional unit conversions"""
     sci: Optional[float] = None
     """SCI in gCO2eg per functional unit"""
@@ -55,3 +55,6 @@ class Metrics:
 
     def __getitem__(self, item):
         return self.data[item]
+
+
+Instances = Dict[str, Metrics]

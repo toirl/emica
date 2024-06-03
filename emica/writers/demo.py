@@ -1,6 +1,6 @@
-from emica.core.metrics import Metrics
+from emica.core.metrics import Instances
 
 
 class DemoWriter:
-    def write(self, data: Metrics):
-        print(data)
+    def write(self, instances: Instances):
+        print(instances)

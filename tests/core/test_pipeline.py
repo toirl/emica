@@ -35,7 +35,7 @@ def test_full_sci_pipeline(metric: Metric):
     writer.write(output_data)
 
     # Assert
-    expected = output_data.data[0]
+    expected = output_data["test"].data[0]
     # assert expected.sci == 0.0169360230585747
     # # That was the origin value from the IF using the teads curve plugin. I
     # guess that the implementation of the algorithem differs a bit.

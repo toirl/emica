@@ -4,7 +4,7 @@ from emica.core.metrics import Metric
 from emica.filters.sci_operation import SCIOperation
 
 
-@pytest.mark.parametrize("attr", ["energy", "grid_carbon_intesity"])
+@pytest.mark.parametrize("attr", ["energy", "grid_carbon_intensity"])
 def test_fail_on_missing_energy_attr(attr: str, metric: Metric):
     # Arrange
     setattr(metric, attr, None)

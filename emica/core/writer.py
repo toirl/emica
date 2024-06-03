@@ -1,5 +1,7 @@
-from typing import Dict, Protocol
+from typing import Protocol
+
+from emica.core.metrics import Instances
 
 
 class Writer(Protocol):  # pragma: no cover
-    def write(self, data: Dict) -> None: ...
+    def write(self, instances: Instances) -> None: ...

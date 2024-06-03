@@ -13,7 +13,7 @@ def test_process(metric: Metric):
     assert r.sci == 0.016111437377222617
 
 
-@pytest.mark.parametrize("attr", ["carbon_operational,carbon_embodied", "funtional_unit", "funtional_unit_time"])
+@pytest.mark.parametrize("attr", ["carbon_operational,carbon_embodied", "functional_unit", "functional_unit_time"])
 def test_fail_on_missing_attr(attr: str, metric: Metric):
     # Arrange
     for a in attr.split(","):
