@@ -22,7 +22,8 @@ classifiers = [
 dependencies = [
     "click",
     "python_dotenv",
-    "structlog"
+    "structlog",
+    "scipy"
 ]
 
 [project.optional-dependencies]

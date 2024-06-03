@@ -32,7 +32,7 @@ def test_pipeline():
     input_data = loader.load()
     output_data = pipeline.process(input_data)
     writer.write(output_data)
-    # Assert
 
+    # Assert
     expected = output_data.data[0]
     assert expected.sci == 0.0169360230585747
