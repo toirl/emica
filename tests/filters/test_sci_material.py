@@ -1,5 +1,3 @@
-from datetime import UTC, datetime
-
 import pytest
 
 from emica.core.metrics import Metric
@@ -7,32 +5,20 @@ from emica.filters.sci_material import SCIMaterial
 
 
 @pytest.mark.parametrize("attr", ["device_emission_embodied", "device_expected_lifespan"])
-def test_fail_on_missing_attr(attr: str):
+def test_fail_on_missing_attr(attr: str, metric: Metric):
     # Arrange
-    m = Metric(
-        timestamp=datetime.now(tz=UTC),
-        duration=60,
-        device_emission_embodied=147000,
-        device_expected_lifespan=94608000,  # three years
-    )
-    setattr(m, attr, None)
+    setattr(metric, attr, None)
     f = SCIMaterial()
     # Act
     # Assert
     with pytest.raises(ValueError):
-        f.process(m)
+        f.process(metric)
 
 
-def test_process():
+def test_process(metric: Metric):
     # Arrange
-    m = Metric(
-        timestamp=datetime.now(tz=UTC),
-        duration=60,
-        device_emission_embodied=147000,
-        device_expected_lifespan=94608000,  # three years
-    )
     # Act
     f = SCIMaterial()
-    r = f.process(m)
+    r = f.process(metric)
     # Assert
     assert r.carbon_embodied == 0.09322678843226789
